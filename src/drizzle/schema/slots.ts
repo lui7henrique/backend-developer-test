@@ -1,9 +1,9 @@
 import { pgEnum, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import type { z } from "zod";
+import { z } from "zod";
 import { doctors } from "./doctors";
 
-const slotStatus = pgEnum("slot_status", ["available", "booked"]);
+export const slotStatus = pgEnum("slot_status", ["available", "booked"]);
 
 export const slots = pgTable("slots", {
 	id: uuid("id").primaryKey().defaultRandom(),
@@ -15,10 +15,14 @@ export const slots = pgTable("slots", {
 	status: slotStatus("status").default("available").notNull(),
 });
 
-export const createSlotSchema = createInsertSchema(slots).omit({
-	id: true,
-});
+export const createSlotSchema = createInsertSchema(slots)
+	.omit({
+		id: true,
+	})
+	.extend({
+		startTime: z.coerce.date(),
+		endTime: z.coerce.date(),
+	});
 
 export type CreateSlotSchema = z.infer<typeof createSlotSchema>;
-
 export type Slot = typeof slots.$inferSelect;
