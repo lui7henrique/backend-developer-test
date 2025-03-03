@@ -1,0 +1,28 @@
+### Create a doctor
+POST http://localhost:3000/doctors
+Content-Type: application/json
+
+{
+  "username": "john.doe",
+	"firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com"
+}
+
+### Create a slot
+POST http://localhost:3000/slots
+Content-Type: application/json
+
+{
+  "startTime": "2025-03-03T10:00:00.000Z",
+  "endTime": "2025-03-03T11:00:00.000Z",
+  "doctorId": "62033f34-f38c-497a-bde7-1c6e50102246"
+}
+
+### Create an appointment
+POST http://localhost:3000/appointments
+Content-Type: application/json
+
+{
+  "slotId": "0ef42dda-3e0c-437c-9acd-277d24c9aac"
+}
