@@ -28,7 +28,8 @@ export const createAppointment = async (
 		.set({
 			status: "booked",
 		})
-		.where(eq(slots.id, slotId));
+		.where(eq(slots.id, slotId))
+		.returning();
 
-	return appointment;
+	return { appointment };
 };

@@ -15,7 +15,6 @@ export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 			},
 		},
 		async (request, reply) => {
-			console.log(request.body);
 			const response = await createAppointment(request.body);
 
 			return reply.status(201).send(response);

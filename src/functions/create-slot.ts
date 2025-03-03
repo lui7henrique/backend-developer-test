@@ -41,5 +41,6 @@ export async function createSlot(slot: CreateSlotSchema) {
 
 	const newSlots = await db.insert(slots).values(slotsToCreate).returning();
 
+	console.log(newSlots);
 	return { newSlots };
 }
