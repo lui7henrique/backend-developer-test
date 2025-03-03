@@ -25,3 +25,6 @@ POST http://localhost:3000/slots/56c0fe7d-2c24-4cee-bc76-fdd3016a3bda/book
 
 ### Get available slots
 GET http://localhost:3000/doctors/62033f34-f38c-497a-bde7-1c6e50102246/available_slots
+
+### Get booked slots
+GET http://localhost:3000/doctors/62033f34-f38c-497a-bde7-1c6e50102246/booked
