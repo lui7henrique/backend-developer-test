@@ -1,18 +1,24 @@
-import { eq } from "drizzle-orm";
+import { and, eq, gt } from "drizzle-orm";
 import { db } from "../drizzle/client";
-import { slots as slotsSchema } from "../drizzle/schema/slots";
+import { slots } from "../drizzle/schema/slots";
 
-type GetSlotsParams = {
+type GetAvailableSlotsParams = {
 	doctorId: string;
 };
 
-export const getSlots = async (params: GetSlotsParams) => {
+export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 	const { doctorId } = params;
 
-	const slots = await db
+	const availableSlots = await db
 		.select()
-		.from(slotsSchema)
-		.where(eq(slotsSchema.doctorId, doctorId));
+		.from(slots)
+		.where(
+			and(
+				eq(slots.doctorId, doctorId),
+				eq(slots.status, "available"),
+				gt(slots.startTime, new Date()),
+			),
+		);
 
-	return { slots: slots };
+	return { availableSlots: availableSlots };
 };

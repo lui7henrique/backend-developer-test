@@ -8,14 +8,14 @@ export const createAppointmentSchema = z.object({
 
 export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 	app.post(
-		"/appointments",
+		"/slots/:slotId/book",
 		{
 			schema: {
-				body: createAppointmentSchema,
+				params: createAppointmentSchema,
 			},
 		},
 		async (request, reply) => {
-			const response = await createAppointment(request.body);
+			const response = await createAppointment(request.params);
 
 			return reply.status(201).send(response);
 		},
