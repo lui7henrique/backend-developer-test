@@ -10,14 +10,15 @@ export const slots = pgTable("slots", {
 	doctorId: uuid("doctor_id")
 		.references(() => doctors.id)
 		.notNull(),
-	startTime: timestamp("start_time").notNull(),
-	endTime: timestamp("end_time").notNull(),
+	startTime: timestamp("start_time", { withTimezone: true }).notNull(),
+	endTime: timestamp("end_time", { withTimezone: true }).notNull(),
 	status: slotStatus("status").default("available").notNull(),
 });
 
 export const createSlotSchema = createInsertSchema(slots)
 	.omit({
 		id: true,
+		status: true,
 	})
 	.extend({
 		startTime: z.coerce.date(),
