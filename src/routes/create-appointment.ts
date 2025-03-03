@@ -16,10 +16,6 @@ export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 				params: z.object({
 					slotId: z.string(),
 				}),
-				body: z.object({
-					patientName: z.string().min(1).optional(),
-					patientEmail: z.string().email().optional(),
-				}),
 			},
 		},
 		async (request, reply) => {
