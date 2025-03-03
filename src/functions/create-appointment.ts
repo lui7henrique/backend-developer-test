@@ -4,11 +4,9 @@ import { db } from "../drizzle/client";
 import { slots } from "../drizzle/schema/slots";
 import type { createAppointmentSchema } from "../routes/create-appointment";
 
-export const createAppointment = async (
-	body: z.infer<typeof createAppointmentSchema>,
-) => {
-	const { slotId } = body;
-
+export const createAppointment = async ({
+	slotId,
+}: z.infer<typeof createAppointmentSchema>) => {
 	const [slot] = await db.select().from(slots).where(eq(slots.id, slotId));
 
 	if (!slot) {
