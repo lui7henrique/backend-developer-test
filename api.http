@@ -16,7 +16,8 @@ Content-Type: application/json
 {
   "startTime": "2025-03-04T10:00:00.000Z",
   "endTime": "2025-03-04T18:00:00.000Z",
-  "doctorId": "62033f34-f38c-497a-bde7-1c6e50102246"
+  "doctorId": "62033f34-f38c-497a-bde7-1c6e50102246",
+  "recurrenceType": "DAILY"
 }
 
 ### Create an appointment
