@@ -25,7 +25,6 @@ export const getBookedSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 		},
 		async (request, reply) => {
 			const { doctorId } = request.params;
-
 			const response = await getBookedSlots({ doctorId });
 
 			return reply.status(200).send(response);

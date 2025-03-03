@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import type { z } from "zod";
 import { db } from "../drizzle/client";
+import { appointments } from "../drizzle/schema/appointments";
 import { slots } from "../drizzle/schema/slots";
 import type { createAppointmentSchema } from "../routes/create-appointment";
 
@@ -17,16 +18,21 @@ export const createAppointment = async ({
 		throw new Error("Slot is in the past");
 	}
 
-	if (slot.status === "booked") {
+	const [existingAppointment] = await db
+		.select()
+		.from(appointments)
+		.where(eq(appointments.slotId, slotId));
+
+	if (existingAppointment) {
 		throw new Error("Slot already booked");
 	}
 
 	const [appointment] = await db
-		.update(slots)
-		.set({
-			status: "booked",
+		.insert(appointments)
+		.values({
+			slotId,
+			doctorId: slot.doctorId,
 		})
-		.where(eq(slots.id, slotId))
 		.returning();
 
 	return { appointment };
