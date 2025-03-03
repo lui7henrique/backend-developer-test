@@ -1,0 +1,33 @@
+{
+	"name": "backend-developer-test",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx watch --env-file=.env src/server.ts",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.13.8",
+		"tsx": "^4.19.3",
+		"typescript": "^5.8.2"
+	},
+	"dependencies": {
+		"@fastify/cors": "^11.0.0",
+		"@fastify/swagger": "^9.4.2",
+		"@fastify/swagger-ui": "^5.2.2",
+		"drizzle-kit": "^0.30.5",
+		"drizzle-orm": "^0.40.0",
+		"drizzle-zod": "^0.7.0",
+		"fastify": "^5.2.1",
+		"fastify-type-provider-zod": "^4.0.2",
+		"postgres": "^3.4.5",
+		"zod": "^3.24.2"
+	}
+}
