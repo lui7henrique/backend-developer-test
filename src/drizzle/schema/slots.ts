@@ -33,6 +33,8 @@ export const createSlotSchema = createInsertSchema(slots)
 		id: true,
 		createdAt: true,
 		updatedAt: true,
+		startDate: true,
+		endDate: true,
 	})
 	.extend({
 		startTime: z.coerce.date(),
