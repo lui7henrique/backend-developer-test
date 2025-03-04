@@ -31,12 +31,12 @@ export const slots = pgTable("slots", {
 export const createSlotSchema = createInsertSchema(slots)
 	.omit({
 		id: true,
+		createdAt: true,
+		updatedAt: true,
 	})
 	.extend({
 		startTime: z.coerce.date(),
 		endTime: z.coerce.date(),
-		startDate: z.coerce.date().nullable().optional(),
-		endDate: z.coerce.date().nullable().optional(),
 	});
 
 export type CreateSlotSchema = z.infer<typeof createSlotSchema>;
