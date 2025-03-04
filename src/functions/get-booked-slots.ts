@@ -8,6 +8,7 @@ export const getBookedSlots = async ({ doctorId }: GetBookedSlotsParams) => {
 	const bookedSlots = await db
 		.select({
 			appointmentId: appointments.id,
+			patientEmail: appointments.patientEmail,
 			...getTableColumns(slots),
 		})
 		.from(appointments)

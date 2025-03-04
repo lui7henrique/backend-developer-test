@@ -15,6 +15,7 @@ const getBookedSlotsResponse = {
 		bookedSlots: z.array(
 			createSelectSchema(slots).extend({
 				appointmentId: z.string(),
+				patientEmail: z.string(),
 			}),
 		),
 	}),
