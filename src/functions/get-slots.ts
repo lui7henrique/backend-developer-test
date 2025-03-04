@@ -1,6 +1,7 @@
-import { addDays, differenceInDays } from "date-fns";
+import { addDays, differenceInDays, isBefore, startOfDay } from "date-fns";
 import { and, eq } from "drizzle-orm";
 import { db } from "../drizzle/client";
+import { appointments } from "../drizzle/schema/appointments";
 import { slots } from "../drizzle/schema/slots";
 
 type GetAvailableSlotsParams = {
@@ -12,18 +13,25 @@ type GetAvailableSlotsParams = {
 export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 	const { doctorId, startDate, endDate } = params;
 
-	// Fetch all slots for the given doctor
 	const allSlots = await db
 		.select()
 		.from(slots)
 		.where(and(eq(slots.doctorId, doctorId)));
 
-	// Calculate the number of days between startDate and endDate
-	const totalDays = differenceInDays(endDate, startDate);
+	const allAppointments = await db
+		.select()
+		.from(appointments)
+		.where(and(eq(appointments.doctorId, doctorId)));
 
-	// Generate slots for each day in the range
+	const totalDays = differenceInDays(endDate, startDate) + 1;
+
 	const generatedSlots = Array.from({ length: totalDays }, (_, dayIndex) => {
 		const currentDate = addDays(startDate, dayIndex);
+
+		// Skip past dates
+		if (isBefore(currentDate, startOfDay(new Date()))) {
+			return { date: currentDate.toISOString().slice(0, 10), slots: [] };
+		}
 
 		// Filter and adjust slots for the current date
 		const slotsForCurrentDay = allSlots.flatMap((slot) => {
@@ -44,6 +52,15 @@ export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 						slotStartTime.getUTCDate() === currentDate.getUTCDate()));
 
 			if (isSlotForToday || isSlotRecurring) {
+				// Check if the slot is already booked
+				const isSlotBooked = allAppointments.some(
+					(appointment) => appointment.slotId === slot.id,
+				);
+
+				if (isSlotBooked) {
+					return [];
+				}
+
 				// Adjust the slot times to the current date
 				const adjustedStartTime = new Date(currentDate);
 				adjustedStartTime.setUTCHours(
@@ -70,7 +87,7 @@ export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 		});
 
 		return {
-			date: currentDate.toISOString().slice(0, 10), // Ensure date is in YYYY-MM-DD format
+			date: currentDate.toISOString().slice(0, 10),
 			slots: slotsForCurrentDay,
 		};
 	});

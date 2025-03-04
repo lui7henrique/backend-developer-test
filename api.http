@@ -15,9 +15,9 @@ Content-Type: application/json
 
 {
   "startTime": "2025-03-05T10:00:00.000Z",
-  "endTime": "2025-03-05T11:30:00.000Z",
+  "endTime": "2025-03-05T13:00:00.000Z",
   "doctorId": "95885db6-3350-4332-b50d-67d8927bc4c6",
-  "recurrenceType": "WEEKLY"
+  "recurrenceType": "DAILY"
 }
 
 ### Create an appointment
@@ -25,7 +25,7 @@ POST http://localhost:3000/slots/56c0fe7d-2c24-4cee-bc76-fdd3016a3bda/book
 
 
 ### Get available slots
-GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available_slots?startDate=2025-03-02&endDate=2025-03-08
+GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available_slots?startDate=2025-03-02&endDate=2025-03-31
 
 
 ### Get booked slots
