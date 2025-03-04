@@ -15,6 +15,7 @@ export const createSlotRoute: FastifyPluginAsyncZod = async (app) => {
 		"/slots",
 		{
 			schema: {
+				description: "Create a slot",
 				body: createSlotSchema,
 				response: createSlotResponse,
 			},

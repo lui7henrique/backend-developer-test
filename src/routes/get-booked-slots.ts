@@ -25,6 +25,7 @@ export const getBookedSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 		"/doctors/:doctorId/booked",
 		{
 			schema: {
+				description: "Get all booked slots for a doctor",
 				params: getBookedSlotsParamsSchema,
 				response: getBookedSlotsResponse,
 			},

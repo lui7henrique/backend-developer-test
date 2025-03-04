@@ -17,6 +17,7 @@ export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 		"/slots/:slotId/book",
 		{
 			schema: {
+				description: "Create an appointment",
 				params: createAppointmentParamsSchema,
 				body: createAppointmentBodySchema,
 			},
