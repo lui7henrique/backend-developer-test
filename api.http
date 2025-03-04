@@ -3,10 +3,10 @@ POST http://localhost:3000/doctors
 Content-Type: application/json
 
 {
-  "username": "john.doe1",
-	"firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe1@example.com"
+  "username": "doctorbixa",
+	"firstName": "Pedro",
+  "lastName": "Renan",
+  "email": "pedro.renan@example.com"
 }
 
 ### Create slots
@@ -14,14 +14,16 @@ POST http://localhost:3000/slots
 Content-Type: application/json
 
 {
-  "startTime": "2025-03-03T10:00:00.000Z",
-  "endTime": "2025-03-03T11:00:00.000Z",
-  "doctorId": "61e23df9-88bc-4ad3-838a-e4d138380a17",
+  "startTime": "2025-03-05T09:00:00.000Z",
+  "endTime": "2025-03-05T12:00:00.000Z",
+  "doctorId": "5ebb2b62-9a58-42cf-8ea0-00bbdead97a1",
   "recurrenceType": "WEEKLY"
 }
 
+
+
 ### Get available slots
-GET http://localhost:3000/doctors/61e23df9-88bc-4ad3-838a-e4d138380a17/available_slots?startDate=2025-03-17&endDate=2025-03-17
+GET http://localhost:3000/doctors/61e23df9-88bc-4ad3-838a-e4d138380a17/available_slots?startDate=2025-03-01&endDate=2025-03-20
 
 ### Create an appointment
 POST http://localhost:3000/slots/32a717df-ad23-44d6-b303-c89b9aa73df8/book

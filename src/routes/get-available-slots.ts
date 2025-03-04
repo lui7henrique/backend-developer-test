@@ -1,6 +1,8 @@
 import { addDays } from "date-fns";
+import { createSelectSchema } from "drizzle-zod";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { z } from "zod";
+import { slots } from "../drizzle/schema/slots";
 import { getAvailableSlots } from "../functions/get-available-slots";
 
 const getAvailableSlotsSchema = z.object({
@@ -20,6 +22,22 @@ const getAvailableSlotsQuerySchema = z.object({
 		.pipe(z.date()),
 });
 
+const getAvailableSlotsResponse = {
+	200: z.object({
+		availableSlots: z.array(
+			z.object({
+				date: z.string(),
+				slots: z.array(
+					createSelectSchema(slots).extend({
+						startTime: z.string(),
+						endTime: z.string(),
+					}),
+				),
+			}),
+		),
+	}),
+};
+
 export const getAvailableSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 	app.get(
 		"/doctors/:doctorId/available_slots",
@@ -29,6 +47,7 @@ export const getAvailableSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 				description: "Get all available slots for a doctor",
 				params: getAvailableSlotsSchema,
 				querystring: getAvailableSlotsQuerySchema,
+				response: getAvailableSlotsResponse,
 			},
 		},
 		async (request, reply) => {
