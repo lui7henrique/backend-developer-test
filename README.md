@@ -1,4 +1,4 @@
-🩺 Doctor Appointment System
+# 🩺 Doctor Appointment System
 
 API for doctor appointment scheduling, built with Fastify, PostgreSQL and Drizzle ORM.
 
