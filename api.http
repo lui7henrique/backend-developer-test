@@ -34,4 +34,4 @@ Content-Type: application/json
 }
 
 ### Get booked slots
-GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/booked
+GET http://localhost:3000/doctors/144907df-89be-4c6e-8cba-7704bfbc7136/booked

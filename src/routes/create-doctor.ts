@@ -4,17 +4,19 @@ import { z } from "zod";
 import { createDoctorSchema, doctors } from "../drizzle/schema/doctors";
 import { createDoctor } from "../functions/create-doctor";
 
+const createDoctorResponse = {
+	201: z.object({
+		doctor: createSelectSchema(doctors),
+	}),
+};
+
 export const createDoctorRoute: FastifyPluginAsyncZod = async (app) => {
 	app.post(
 		"/doctors",
 		{
 			schema: {
 				body: createDoctorSchema,
-				response: {
-					201: z.object({
-						doctor: createSelectSchema(doctors),
-					}),
-				},
+				response: createDoctorResponse,
 			},
 		},
 		async (request, reply) => {

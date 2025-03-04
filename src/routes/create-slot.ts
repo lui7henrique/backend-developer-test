@@ -4,17 +4,19 @@ import { z } from "zod";
 import { createSlotSchema, slots } from "../drizzle/schema/slots";
 import { createSlot } from "../functions/create-slot";
 
+const createSlotResponse = {
+	201: z.object({
+		newSlots: z.array(createSelectSchema(slots)),
+	}),
+};
+
 export const createSlotRoute: FastifyPluginAsyncZod = async (app) => {
 	app.post(
 		"/slots",
 		{
 			schema: {
 				body: createSlotSchema,
-				response: {
-					201: z.object({
-						newSlots: z.array(createSelectSchema(slots)),
-					}),
-				},
+				response: createSlotResponse,
 			},
 		},
 		async (request, reply) => {

@@ -1,5 +1,4 @@
 import { isSameDay } from "date-fns";
-import { and, between, eq } from "drizzle-orm";
 import { db } from "../drizzle/client";
 import { type CreateSlotSchema, slots } from "../drizzle/schema/slots";
 
