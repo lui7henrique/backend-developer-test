@@ -1,5 +1,6 @@
 import type { Config } from "drizzle-kit";
 import { env } from "./src/env";
+console.log({ env });
 
 export default {
 	schema: "./src/drizzle/schema/*",

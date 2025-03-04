@@ -12,17 +12,5 @@ services:
     volumes:
       - postgres_data:/bitnami/postgresql
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    environment:
-      - POSTGRES_URL=postgresql://docker:docker@service-pg:5432/backend-developer-test
-      - PORT=3000
-    depends_on:
-      - service-pg
-
 volumes:
   postgres_data:
