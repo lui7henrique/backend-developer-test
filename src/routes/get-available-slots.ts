@@ -1,8 +1,6 @@
 import { addDays } from "date-fns";
-import { createSelectSchema } from "drizzle-zod";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { z } from "zod";
-import { slots } from "../drizzle/schema/slots";
 import { getAvailableSlots } from "../functions/get-slots";
 
 const getAvailableSlotsSchema = z.object({
@@ -10,8 +8,16 @@ const getAvailableSlotsSchema = z.object({
 });
 
 const getAvailableSlotsQuerySchema = z.object({
-	startDate: z.coerce.date().default(new Date()),
-	endDate: z.coerce.date().default(addDays(new Date(), 1)),
+	startDate: z
+		.string()
+		.default(new Date().toISOString())
+		.transform((date) => new Date(date))
+		.pipe(z.date()),
+	endDate: z
+		.string()
+		.default(addDays(new Date(), 7).toISOString())
+		.transform((date) => new Date(date))
+		.pipe(z.date()),
 });
 
 export const getAvailableSlotsRoute: FastifyPluginAsyncZod = async (app) => {

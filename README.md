@@ -18,28 +18,20 @@ API for doctor appointment scheduling, built with Fastify, PostgreSQL and Drizzl
 - 📊 Data validation with Zod schemas
 - 🔄 Multiple recurrence patterns (daily, weekly, monthly)
 
-## 🏃‍♂️ Quick Start
-
-Prerequisites: Node.js and Docker
+## 🏃‍♂️ Setup
 
 ```bash
 # Clone and install
 git clone https://github.com/lui7henrique/backend-developer-test
-bun install
 
 # Setup
-docker compose up -d
-cp .env.example .env
-
-# Run migrations and start
-bun run db:migrate
-bun run dev
+docker compose up --build 
 ```
 
-Access the API at http://localhost:3000
 
-## 📦 Build
+# Development
 
-```bash
-bun run build
 ```
+```
+
+Access the API documentation at http://localhost:3000/docs
