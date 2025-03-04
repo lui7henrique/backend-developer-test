@@ -20,13 +20,20 @@ Content-Type: application/json
   "recurrenceType": "DAILY"
 }
 
-### Create an appointment
-POST http://localhost:3000/slots/8c95bcbf-05a8-4aaa-b53e-a29dfca6716b/book
-
 
 ### Get available slots
 GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available_slots?startDate=2025-04-02&endDate=2025-04-31
 
+### Create an appointment
+POST http://localhost:3000/slots/85ef8dc7-19c9-4db6-9eb0-e359ca2c7086/book
+Content-Type: application/json
+
+{
+  "startTime": "2025-04-03T10:00:00.000Z",
+  "endTime": "2025-04-03T10:30:00.000Z",
+  "patientName": "John Doe",
+  "patientEmail": "john.doe@example.com"
+}
 
 ### Get booked slots
 GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/booked

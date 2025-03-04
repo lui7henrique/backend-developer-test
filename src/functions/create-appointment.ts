@@ -3,13 +3,16 @@ import type { z } from "zod";
 import { db } from "../drizzle/client";
 import { appointments } from "../drizzle/schema/appointments";
 import { slots } from "../drizzle/schema/slots";
-import type { createAppointmentSchema } from "../routes/create-appointment";
+import type {
+	createAppointmentBodySchema,
+	createAppointmentParamsSchema,
+} from "../routes/create-appointment";
 
-export const createAppointment = async ({
-	slotId,
-	startTime,
-	endTime,
-}: z.infer<typeof createAppointmentSchema>) => {
+type CreateAppointmentParams = z.infer<typeof createAppointmentParamsSchema> &
+	z.infer<typeof createAppointmentBodySchema>;
+
+export const createAppointment = async (params: CreateAppointmentParams) => {
+	const { patientEmail, slotId, startTime, endTime } = params;
 	const [slot] = await db.select().from(slots).where(eq(slots.id, slotId));
 
 	if (!slot) {
@@ -38,10 +41,11 @@ export const createAppointment = async ({
 	const [appointment] = await db
 		.insert(appointments)
 		.values({
-			slotId,
 			doctorId: slot.doctorId,
-			startTime: startTime,
-			endTime: endTime,
+			slotId,
+			startTime,
+			endTime,
+			patientEmail,
 		})
 		.returning();
 

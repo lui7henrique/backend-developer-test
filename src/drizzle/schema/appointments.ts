@@ -1,4 +1,4 @@
-import { pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { doctors } from "./doctors";
@@ -15,6 +15,7 @@ export const appointments = pgTable("appointments", {
 	createdAt: timestamp("created_at").notNull().defaultNow(),
 	startTime: timestamp("start_time").notNull(),
 	endTime: timestamp("end_time").notNull(),
+	patientEmail: text("patient_email").notNull(),
 });
 
 export const createAppointmentSchema = createInsertSchema(appointments)
