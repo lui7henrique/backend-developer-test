@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Create an appointment
-POST http://localhost:3000/slots/56c0fe7d-2c24-4cee-bc76-fdd3016a3bda/book
+POST http://localhost:3000/slots/8c95bcbf-05a8-4aaa-b53e-a29dfca6716b/book
 
 
 ### Get available slots
@@ -29,4 +29,4 @@ GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available
 
 
 ### Get booked slots
-GET http://localhost:3000/doctors/62033f34-f38c-497a-bde7-1c6e50102246/booked
+GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/booked

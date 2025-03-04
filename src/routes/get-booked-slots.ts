@@ -18,7 +18,11 @@ export const getBookedSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 				params: getBookedSlotsParamsSchema,
 				response: {
 					200: z.object({
-						bookedSlots: z.array(createSelectSchema(slots)),
+						bookedSlots: z.array(
+							createSelectSchema(slots).extend({
+								appointmentId: z.string(),
+							}),
+						),
 					}),
 				},
 			},
