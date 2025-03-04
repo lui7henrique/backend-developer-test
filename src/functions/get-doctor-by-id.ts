@@ -5,5 +5,7 @@ import { doctors } from "../drizzle/schema/doctors";
 export async function getDoctorById(id: string) {
 	const [doctor] = await db.select().from(doctors).where(eq(doctors.id, id));
 
-	return doctor;
+	return {
+		doctor: doctor || null,
+	};
 }

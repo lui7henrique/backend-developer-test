@@ -9,7 +9,9 @@ const getDoctorByIdParams = z.object({
 });
 
 const getDoctorByIdResponse = {
-	200: createSelectSchema(doctors).nullable(),
+	200: z.object({
+		doctor: createSelectSchema(doctors),
+	}),
 	404: z.object({
 		message: z.string(),
 	}),
@@ -28,13 +30,13 @@ export const getDoctorByIdRoute: FastifyPluginAsyncZod = async (app) => {
 			},
 		},
 		async (request, reply) => {
-			const doctor = await getDoctorById(request.params.id);
+			const response = await getDoctorById(request.params.id);
 
-			if (!doctor) {
+			if (!response) {
 				return reply.status(404).send({ message: "Doctor not found" });
 			}
 
-			return reply.status(200).send(doctor);
+			return reply.status(200).send(response);
 		},
 	);
 };
