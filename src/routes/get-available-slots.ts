@@ -48,6 +48,7 @@ export const getAvailableSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 				params: getAvailableSlotsSchema,
 				querystring: getAvailableSlotsQuerySchema,
 				response: getAvailableSlotsResponse,
+				summary: "Get all available slots for booking appointments",
 			},
 		},
 		async (request, reply) => {

@@ -21,6 +21,7 @@ export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 				description: "Create an appointment",
 				params: createAppointmentParamsSchema,
 				body: createAppointmentBodySchema,
+				summary: "Create a new appointment for a patient with a doctor",
 			},
 		},
 		async (request, reply) => {

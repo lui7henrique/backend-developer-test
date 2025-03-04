@@ -13,7 +13,7 @@ export const getDoctorsRoute: FastifyPluginAsyncZod = async (app) => {
 		"/doctors",
 		{
 			schema: {
-				summary: "Get all doctors",
+				summary: "Get a list of all available doctors",
 				description: "Get all doctors",
 				operationId: "getDoctors",
 				response: getDoctorsResponse,

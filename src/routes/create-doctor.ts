@@ -19,6 +19,7 @@ export const createDoctorRoute: FastifyPluginAsyncZod = async (app) => {
 				description: "Create a doctor",
 				body: createDoctorSchema,
 				response: createDoctorResponse,
+				summary: "Create a new doctor profile",
 			},
 		},
 		async (request, reply) => {

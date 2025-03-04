@@ -30,6 +30,7 @@ export const getBookedSlotsRoute: FastifyPluginAsyncZod = async (app) => {
 				description: "Get all booked slots for a doctor",
 				params: getBookedSlotsParamsSchema,
 				response: getBookedSlotsResponse,
+				summary: "Get all booked slots",
 			},
 		},
 		async (request, reply) => {
