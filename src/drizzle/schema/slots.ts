@@ -19,9 +19,7 @@ export const slots = pgTable("slots", {
 	endTime: timestamp("end_time", { withTimezone: true }).notNull(),
 	startDate: timestamp("start_date", { withTimezone: true }),
 	endDate: timestamp("end_date", { withTimezone: true }),
-	recurrenceType: recurrenceType("recurrence_type").default("NONE"),
-
-	// Timestamps
+	recurrenceType: recurrenceType("recurrence_type").default("NONE").notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.notNull()
 		.defaultNow(),
