@@ -9,7 +9,7 @@ Content-Type: application/json
   "email": "john.doe@example.com"
 }
 
-### Create a slot
+### Create slots
 POST http://localhost:3000/slots
 Content-Type: application/json
 

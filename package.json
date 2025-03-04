@@ -6,7 +6,10 @@
 		"dev": "tsx watch --env-file=.env src/server.ts",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"build": "dotenv -e .env -- tsup src/server.ts --out-dir dist --format esm,cjs --dts",
+		"start": "dotenv -e .env -- bun dist/server.js",
+		"migrate": "tsx src/drizzle/migrate.ts"
 	},
 	"keywords": [],
 	"author": "",
@@ -15,6 +18,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@types/node": "^22.13.8",
+		"dotenv-cli": "^8.0.0",
+		"tsup": "^8.4.0",
 		"tsx": "^4.19.3",
 		"typescript": "^5.8.2"
 	},
