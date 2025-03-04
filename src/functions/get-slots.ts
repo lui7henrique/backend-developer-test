@@ -52,18 +52,6 @@ export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 						slotStartTime.getUTCDate() === currentDate.getUTCDate()));
 
 			if (isSlotForToday || isSlotRecurring) {
-				// Check if the slot is already booked for the current date
-				const isSlotBooked = allAppointments.some(
-					(appointment) =>
-						appointment.slotId === slot.id &&
-						new Date(appointment.createdAt).toISOString().slice(0, 10) ===
-							currentDate.toISOString().slice(0, 10),
-				);
-
-				if (isSlotBooked) {
-					return [];
-				}
-
 				// Adjust the slot times to the current date
 				const adjustedStartTime = new Date(currentDate);
 				adjustedStartTime.setUTCHours(
@@ -78,6 +66,18 @@ export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 					slotEndTime.getUTCMinutes(),
 					slotEndTime.getUTCSeconds(),
 				);
+
+				const isSlotBooked = allAppointments.some(
+					(appointment) =>
+						appointment.slotId === slot.id &&
+						appointment.startTime.toISOString() ===
+							adjustedStartTime.toISOString() &&
+						appointment.endTime.toISOString() === adjustedEndTime.toISOString(),
+				);
+
+				if (isSlotBooked) {
+					return [];
+				}
 
 				return {
 					...slot,
