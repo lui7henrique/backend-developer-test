@@ -50,6 +50,13 @@
       "when": 1741045004400,
       "tag": "0006_flat_patriot",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1741054936662,
+      "tag": "0007_amazing_shard",
+      "breakpoints": true
     }
   ]
 }
