@@ -13,6 +13,8 @@ export const appointments = pgTable("appointments", {
 		.references(() => doctors.id)
 		.notNull(),
 	createdAt: timestamp("created_at").notNull().defaultNow(),
+	startTime: timestamp("start_time").notNull(),
+	endTime: timestamp("end_time").notNull(),
 });
 
 export const createAppointmentSchema = createInsertSchema(appointments)

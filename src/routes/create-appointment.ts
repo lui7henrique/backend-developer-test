@@ -4,8 +4,8 @@ import { createAppointment } from "../functions/create-appointment";
 
 export const createAppointmentSchema = z.object({
 	slotId: z.string(),
-	patientName: z.string().min(1).optional(),
-	patientEmail: z.string().email().optional(),
+	startTime: z.coerce.date(),
+	endTime: z.coerce.date(),
 });
 
 export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
@@ -19,11 +19,7 @@ export const createAppointmentRoute: FastifyPluginAsyncZod = async (app) => {
 			},
 		},
 		async (request, reply) => {
-			const { slotId } = request.params;
-
-			const response = await createAppointment({
-				slotId,
-			});
+			const response = await createAppointment(request.params);
 
 			return reply.status(201).send(response);
 		},

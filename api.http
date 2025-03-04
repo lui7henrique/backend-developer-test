@@ -25,7 +25,7 @@ POST http://localhost:3000/slots/8c95bcbf-05a8-4aaa-b53e-a29dfca6716b/book
 
 
 ### Get available slots
-GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available_slots?startDate=2025-03-02&endDate=2025-03-31
+GET http://localhost:3000/doctors/95885db6-3350-4332-b50d-67d8927bc4c6/available_slots?startDate=2025-04-02&endDate=2025-04-31
 
 
 ### Get booked slots

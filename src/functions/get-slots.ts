@@ -52,9 +52,12 @@ export const getAvailableSlots = async (params: GetAvailableSlotsParams) => {
 						slotStartTime.getUTCDate() === currentDate.getUTCDate()));
 
 			if (isSlotForToday || isSlotRecurring) {
-				// Check if the slot is already booked
+				// Check if the slot is already booked for the current date
 				const isSlotBooked = allAppointments.some(
-					(appointment) => appointment.slotId === slot.id,
+					(appointment) =>
+						appointment.slotId === slot.id &&
+						new Date(appointment.createdAt).toISOString().slice(0, 10) ===
+							currentDate.toISOString().slice(0, 10),
 				);
 
 				if (isSlotBooked) {
