@@ -7,9 +7,11 @@ import type { GetBookedSlotsParams } from "../routes/get-booked-slots";
 export const getBookedSlots = async ({ doctorId }: GetBookedSlotsParams) => {
 	const bookedSlots = await db
 		.select({
+			...getTableColumns(slots),
 			appointmentId: appointments.id,
 			patientEmail: appointments.patientEmail,
-			...getTableColumns(slots),
+			startTime: appointments.startTime,
+			endTime: appointments.endTime,
 		})
 		.from(appointments)
 		.innerJoin(slots, eq(appointments.slotId, slots.id))
