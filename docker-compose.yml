@@ -11,6 +11,33 @@ services:
       - POSTGRESQL_REPLICATION_USE_PASSFILE="no"
     volumes:
       - postgres_data:/bitnami/postgresql
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "docker" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      service-pg:
+        condition: service_healthy
+    environment:
+      - POSTGRES_URL=postgresql://docker:docker@service-pg:5432/backend-developer-test
+      - PORT=3000
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   postgres_data:
