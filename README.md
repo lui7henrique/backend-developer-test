@@ -28,10 +28,4 @@ git clone https://github.com/lui7henrique/backend-developer-test
 docker compose up --build 
 ```
 
-
-# Development
-
-```
-```
-
 Access the API documentation at http://localhost:3000/docs

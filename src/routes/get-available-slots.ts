@@ -1,7 +1,7 @@
 import { addDays } from "date-fns";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { z } from "zod";
-import { getAvailableSlots } from "../functions/get-slots";
+import { getAvailableSlots } from "../functions/get-available-slots";
 
 const getAvailableSlotsSchema = z.object({
 	doctorId: z.string(),
